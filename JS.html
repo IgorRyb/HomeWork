@@ -1,0 +1,190 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>ДЗ по HTML/JS</title>
+    <style>
+	#students {
+	border: 1px solid blue;
+	border-collapse: collapse;
+	width: 20%;
+	}
+	#students tr td {
+	padding: 7px;
+	padding-right:65px;
+	}
+	#name {
+	width:250px;
+	border-color: blue;
+	}
+	#data {
+	width:250px;
+	border-color: blue;
+	}
+	#sel {
+	width:250px;
+	border-color: blue;
+	}
+	#studentsList {
+	border: 1px solid blue;
+	border-collapse: collapse;
+	}
+	#studentsList thead td:nth-child(1) {
+	width:250px;
+	}
+	#studentsList thead td:nth-child(2) {
+	width:100px;
+	}
+	
+	#studentsList tr td {
+	border: 1px solid blue;
+	padding: 1px;
+	padding-right:65px;
+	}
+	#avg {
+	border: 1px solid blue;
+	border-collapse: collapse;
+	}
+	#avg tr td {
+	border: 1px solid blue;
+	padding: 1px;
+	}
+	#avg thead td:nth-child(1) {
+	width:650px;
+	}
+	#avg thead td:nth-child(2) {
+	width:118px;;
+	}
+    </style>
+	
+   <script>
+   let counter = 3;
+   let ageS = 74;
+	function addStudent() {
+		const studentsTab = document.getElementById("studentsList"	);
+		let studentName = document.getElementById("name").value;
+		let studentData = document.getElementById("data").value;
+		let studentSex = document.getElementById("sel").value;
+		
+		const newRow = studentsList.insertRow(studentsList.rows.length);
+		const firstCell = newRow.insertCell(0);
+		const thirdCell = newRow.insertCell(-1);
+		const secondCell = newRow.insertCell(-1);
+		
+		firstCell.appendChild(document.createTextNode(studentName));
+		thirdCell.appendChild(document.createTextNode(studentSex));
+		secondCell.appendChild(document.createTextNode(studentData));
+		
+		let age = ((new Date().getTime() - new Date(studentData)) / (24 * 3600 * 365.25 * 1000)) | 0;
+		const fourthCell = newRow.insertCell(-1);
+		fourthCell.appendChild(document.createTextNode(age));
+		
+		counter += 1;
+		ageS += age;
+		const result = ageS / counter;
+		let avarageAge = document.getElementById("avgAge");
+		avarageAge.innerHTML = result;
+	}
+	</script>
+	
+</head>
+
+<body>
+
+<h2>
+Форма добавления информации о студенте
+</h2>
+
+
+
+<table id = "students">  
+<tbody>
+    <tr>
+	<td>Имя студента:</td>
+	<td><input id = "name" type = "text" value = "Блуд"></td>
+	</tr>
+	<tr>
+	<td>Дата рождения:</td>
+	<td><input id = "data" type = "date"  value = "2000-04-06"></td>
+	</tr>
+	<tr>
+	<td>Пол:</td>
+	<td>
+		<select id = "sel">
+			<option value = "Мужской">Мужской</option>
+			<option value = "Женский">Женский</option>
+		</select>
+	</td>
+	</tr>
+</tbody>
+<div class="counter"><tr><td><button onclick="addStudent()" type="button" class="add">Добавить</button></td></tr></div>
+</table>
+
+
+<h2>
+    Таблица студентов
+</h2>
+
+<table id = "studentsList">
+<thead>
+<tr>
+<div id = "student-name"><td>Имя</td></div>
+<td>Пол</td>
+<td>Дата рождения</td>
+<td>Возраст</td>
+</tr>
+</thead>
+<tbody>
+	<tr>
+        <td>Петра</td>
+		<td>Женский</td>
+		<td>2001-02-22</td>
+		<td>22</td>
+    </tr>
+    <tr>
+        <td>Герасим</td>
+		<td>Мужской</td>
+		<td>1999-07-12</td>
+		<td>24</td>
+    </tr>
+    <tr>
+        <td>Фауст</td>
+		<td>Мужской</td>
+		<td>1995-02-22</td>
+		<td>28</td>
+    </tr>
+
+</tbody>
+</table>
+
+<table id="avg">
+<thead>
+<tr>
+<td>Средний возраст студентов</td>
+<td id="avgAge">25</td>
+</tr>
+</thead>
+</table>
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
