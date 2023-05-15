@@ -1,42 +1,40 @@
 package main;
 
-import java.util.Scanner;
 
-public class RubleCurrency implements Currency{
+public class Money {
     private int number;
-
-    public RubleCurrency(int number) {
+    public Money(int number) {
         this.number = number;
     }
 
-    public void output() {
+    public void output(Currency currency) {
         System.out.println("Ввод с консоли: " + number);
         if (number == 0) {
-            System.out.println("Вывод программы: " + "ноль" + toWords());
+            System.out.println("Вывод программы: " + "ноль " + toWords(currency));
         } else if (number < 20 && number > 0) {
-            System.out.println("Вывод программы: " + upToTwentyInWords() + toWords());
+            System.out.println("Вывод программы: " + upToTwentyInWords() + " " + toWords(currency));
         } else if ((number >= 20) && (number <= 99)) {
-            System.out.println("Вывод программы: " + upToHundredInWords() + " " + upToTwentyInWords() + toWords());
+            System.out.println("Вывод программы: " + upToHundredInWords() + " " + upToTwentyInWords() + " " + toWords(currency));
         } else if ((number >= 100) && (number <= 999)) {
-            System.out.println("Вывод программы: " + upToThousandInWords() + " " + upToHundredInWords() + " " + upToTwentyInWords() + toWords());
-        } else {
-            System.out.println("Введите положительное число от НУЛЯ до ТЫСЯЧИ");
+            System.out.println("Вывод программы: " + upToThousandInWords() + " " + upToHundredInWords() + " " + upToTwentyInWords() + " " + toWords(currency));
         }
 }
 
-public String toWords() {;
-    String price = " рублей";
+public String toWords(Currency currency) {
+    String price = currency.getParentPluralCurrency();
     if ((number < 10) || (number > 20)) {
         int lastDigit = number % 10;
+        if (number > 99) {
+            lastDigit = number % 100;
+        }
         if (lastDigit == 1) {
-            price = " рубль";
+            price = currency.getEminentCurrency();
         } else if ((lastDigit == 2) || (lastDigit == 3) || (lastDigit == 4)) {
-            price = " рубля";
-        } else {
-            price = " рублей";
+            price = currency.getParentSingularCurrency();
         }
     }
     return price;
+
 }
 
 public String[] arrayToTen() {
@@ -48,9 +46,12 @@ public String[] arrayToTen() {
 public String upToTwentyInWords() {
     String words = "";
     int lastDigit = number % 10;
+    if (number > 99) {
+        lastDigit = number % 100;
+    }
     String[] tenArray = arrayToTen();
     for (int i = 0; i <= tenArray.length; i++) {
-        if (i == number && number < 20 && number > 0) {
+        if ((i == number) && (number < 20) && (number > 0)) {
             words = tenArray[number -1];
         } else if ((number > 20) && (lastDigit == i) && (lastDigit !=0)) {
             words = tenArray[lastDigit-1];
